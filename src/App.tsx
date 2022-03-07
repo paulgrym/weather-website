@@ -29,9 +29,21 @@ const App: React.VFC = () => {
           APIchoice={APIchoice}
           setAPIchoice={setAPIchoice}
         />
-        {weatherData?.state === "success"
-          ? <Result basicWeatherData={weatherData?.basicWeatherData} />
-          : null}
+        {weatherData?.state === "error"
+          ? (
+            <section>
+              <p>
+                Ups...coś poszło nie tak. &#128531; <br />
+                Sprawdź, czy masz połączenie z internetem. <br />
+                Jeśli tak, spróbuj ponownie później.
+              </p>
+            </section>
+          )
+          : (weatherData?.state === "success"
+            ? <Result basicWeatherData={weatherData?.basicWeatherData} />
+            : null
+          )
+        }
       </main>
       <footer className="footer">
         <a
