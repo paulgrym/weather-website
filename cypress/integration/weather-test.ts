@@ -7,10 +7,7 @@ describe("weather form", () => {
 
     // then
     displaysHeader("Pogoda na dziś");
-    displaysLatitudeInput();
-    displaysLongitudeInput();
-    displaysRadioButtons();
-    displaysButton("Pokaż pogodę!");
+    displaysFormElements("Pokaż pogodę!");
   });
 
   it("returns Openweathermap weather successfully", () => {
@@ -21,7 +18,7 @@ describe("weather form", () => {
     completeForm("[data-testid=API1Input]", 52, 22);
 
     // then
-    cy.get("[data-testid=resultLink]").should("be.visible").should("contain.text", "Openweathermap");
+    isData("Openweathermap");
   });
 
   it("returns Weatherbit weather successfully", () => {
@@ -32,7 +29,7 @@ describe("weather form", () => {
     completeForm("[data-testid=API2Input]", 52, 22);
 
     // then
-    cy.get("[data-testid=resultLink]").should("be.visible").should("contain.text", "Weatherbit");
+    isData("Weatherbit");
   });
 });
 
@@ -41,38 +38,39 @@ function websiteIsOpened() {
   cy.get("[data-testid=weatherContainer]").should("exist");
 }
 
-function completeForm(radioInput: string, lat: number, long: number) {
-  cy.get("[data-testid=latitudeInput]").type(lat);
-  cy.get("[data-testid=longitudeInput]").type(long);
-  cy.get(radioInput).check();
-  cy.intercept({
-    method: 'GET',
-    url: '*',
-  }).as('getData')
-  cy.get("[data-testid=submit]").click();
-  cy.wait('@getData')
-}
-
 function displaysHeader(headerText: string) {
   cy.get("[data-testid=header]").should("be.visible").contains(headerText);
 }
 
-function displaysLatitudeInput() {
+function displaysFormElements(buttonText: string) {
   cy.get("[data-testid=latitudeInput]").should("be.visible");
-}
 
-function displaysLongitudeInput() {
   cy.get("[data-testid=longitudeInput]").should("be.visible");
-}
 
-function displaysRadioButtons() {
   cy.get("[data-testid=radioButtonsList]").should("be.visible").within(() => {
     cy.get("li").should("have.length", 2);
     cy.get("li").first().contains("openweathermap.org");
     cy.get("li").last().contains("weatherbit.io");
-  })
+  });
+
+  cy.get("[data-testid=submit]").should("be.visible").contains(buttonText);
 }
 
-function displaysButton(buttonText: string) {
-  cy.get("[data-testid=submit]").should("be.visible").contains(buttonText);
+function completeForm(radioInput: string, lat: number, lon: number) {
+  cy.get("[data-testid=latitudeInput]").type(lat);
+  cy.get("[data-testid=longitudeInput]").type(lon);
+  cy.get(radioInput).check();
+  cy.intercept({
+    method: "GET",
+    url: "*",
+  }).as("getData")
+  cy.get("[data-testid=submit]").click();
+  cy.wait("@getData")
+}
+
+function isData(source: string) {
+  cy.get("[data-testid=resultSection]").should("be.visible").within(() => {
+    cy.get("p").should("have.length", 4);
+  })
+  cy.get("[data-testid=resultLink]").should("be.visible").should("contain.text", source);
 }

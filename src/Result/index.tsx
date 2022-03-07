@@ -8,7 +8,7 @@ interface ResultProps {
 export const Result: React.VFC<ResultProps> = ({ basicWeatherData }) => {
 
   return (
-    <section>
+    <section data-testid="resultSection">
       <p>
         Temperatura: {basicWeatherData.temperature.toFixed(1)} &deg;C
       </p>
