@@ -25,7 +25,6 @@ export const useWeatherData = () => {
       }
 
       const data = await response.json();
-      console.log(data);
 
       let basicWeatherData: BasicWeatherData;
       if (APIchoice === "API1") {
