@@ -57,8 +57,11 @@ export const Form: React.VFC<FormProps> = ({
             />
           </label>
         </div>
-        <ul className="form__list" data-testid="radioButtonsList">
-          <li className="form__listItem">
+      </fieldset>
+      <fieldset className="form__fieldset">
+        <legend className="form__radioButtonsListTitle">Źródło danych:</legend>
+        <ul className="form__radioButtonsList" data-testid="radioButtonsList">
+          <li className="form__radioButtonsListItem">
             <label>
               <input
                 type="radio"

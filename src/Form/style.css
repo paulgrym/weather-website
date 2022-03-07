@@ -35,7 +35,11 @@
   font-size: 15px;
 }
 
-.form__list {
+.form__radioButtonsListTitle {
+  margin: 0 0 10px;
+}
+
+.form__radioButtonsList {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
@@ -44,7 +48,7 @@
   margin: 0;
 }
 
-.form__listItem {
+.form__radioButtonsListItem {
   margin: 0 20px 20px 20px;
 }
 
