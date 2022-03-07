@@ -1,0 +1,8 @@
+.result__link {
+  text-decoration: none;
+  color: rgb(31 116 213);
+}
+
+.result__link:hover {
+  border-bottom: 1px solid rgba(31, 116, 213, 0.671);
+}

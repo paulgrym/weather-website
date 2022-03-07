@@ -1,6 +1,7 @@
 import { useWeatherData } from "./useWeatherData";
 import { Form } from "./Form"
 import './App.css';
+import { Result } from "./Result";
 
 const App: React.VFC = () => {
   const {
@@ -28,6 +29,9 @@ const App: React.VFC = () => {
           APIchoice={APIchoice}
           setAPIchoice={setAPIchoice}
         />
+        {weatherData?.state === "success"
+          ? <Result basicWeatherData={weatherData?.basicWeatherData} />
+          : null}
       </main>
       <footer className="footer">
         <a
