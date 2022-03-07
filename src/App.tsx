@@ -16,7 +16,7 @@ const App: React.VFC = () => {
   } = useWeatherData();
 
   return (
-    <div className="container">
+    <div className="container" data-testid="weatherContainer">
       <main className="main">
         <h1 className="header" data-testid="header">Pogoda na dziś</h1>
         <Form
