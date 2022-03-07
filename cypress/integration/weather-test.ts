@@ -12,6 +12,46 @@ describe("weather form", () => {
     displaysRadioButtons();
     displaysButton("Pokaż pogodę!");
   });
+
+  it("returns Openweathermap weather successfully", () => {
+    // given
+    websiteIsOpened();
+
+    // when
+    cy.get("[data-testid=latitudeInput]").type("52");
+    cy.get("[data-testid=longitudeInput]").type("22");
+    cy.get("[data-testid=API1Input]").check();
+    cy.intercept({
+      method: 'GET',
+      url: '*',
+    }).as('getData')
+    cy.get("[data-testid=submit]").click();
+    cy.wait('@getData')
+
+    // then
+
+    cy.get("[data-testid=resultLink]").should("be.visible").should("contain.text", "Openweathermap");
+  });
+
+  it("returns Weatherbit weather successfully", () => {
+    // given
+    websiteIsOpened();
+
+    // when
+    cy.get("[data-testid=latitudeInput]").type("52");
+    cy.get("[data-testid=longitudeInput]").type("22");
+    cy.get("[data-testid=API2Input]").check();
+    cy.intercept({
+      method: 'GET',
+      url: '*',
+    }).as('getData')
+    cy.get("[data-testid=submit]").click();
+    cy.wait('@getData')
+
+    // then
+
+    cy.get("[data-testid=resultLink]").should("be.visible").should("contain.text", "Weatherbit");
+  });
 });
 
 function displaysHeader(result: string) {
