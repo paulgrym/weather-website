@@ -1,9 +1,29 @@
+import { FormProps } from "../interfaces";
 import "./style.css";
 
-export const Form = () => {
+export const Form: React.VFC<FormProps> = ({
+  getWeather,
+  weatherData,
+  latitude,
+  setLatitude,
+  longitude,
+  setLongitude,
+  APIchoice,
+  setAPIchoice
+}) => {
+
+  const onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    getWeather();
+  };
+
+  const onLatitudeChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => setLatitude(target.value);
+  const onLongitudeChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => setLongitude(target.value);
+
+  console.log(weatherData);
 
   return (
-    <form className="form">
+    <form className="form" onSubmit={onFormSubmit}>
       <fieldset className="form__fieldset">
         <div className="form__container">
           <label className="form__label">
@@ -16,6 +36,9 @@ export const Form = () => {
               max="90"
               step="0.01"
               required
+              value={latitude}
+              onChange={onLatitudeChange}
+              data-testid="latitudeInput"
             />
           </label>
           <label className="form__label">
@@ -28,14 +51,21 @@ export const Form = () => {
               max="180"
               step="0.01"
               required
+              value={longitude}
+              onChange={onLongitudeChange}
+              data-testid="longitudeInput"
             />
           </label>
         </div>
-        <ul className="form__list">
+        <ul className="form__list" data-testid="radioButtonsList">
           <li className="form__listItem">
             <label>
               <input
                 type="radio"
+                checked={"API1" === APIchoice}
+                onChange={() => { setAPIchoice("API1") }}
+                value={"API1"}
+                data-testid="API1Input"
               />
               &nbsp;openweathermap.org
             </label>
@@ -44,13 +74,17 @@ export const Form = () => {
             <label>
               <input
                 type="radio"
+                checked={"API2" === APIchoice}
+                onChange={() => { setAPIchoice("API2") }}
+                value={"API2"}
+                data-testid="API2Input"
               />
               &nbsp;weatherbit.io
             </label>
           </li>
         </ul>
       </fieldset>
-      <button className="form__button">Pokaż pogodę!</button>
+      <button className="form__button" data-testid="submit">Pokaż pogodę!</button>
     </ form>
   )
 };

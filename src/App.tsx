@@ -1,13 +1,33 @@
+import { useWeatherData } from "./useWeatherData";
 import { Form } from "./Form"
-import "./App.css"
+import './App.css';
 
-const App = () => {
+const App: React.VFC = () => {
+  const {
+    getWeather,
+    weatherData,
+    latitude,
+    setLatitude,
+    longitude,
+    setLongitude,
+    APIchoice,
+    setAPIchoice,
+  } = useWeatherData();
 
   return (
     <div className="container">
       <main className="main">
-        <h1 className="header">Pogoda na dziś</h1>
-        <Form />
+        <h1 className="header" data-testid="header">Pogoda na dziś</h1>
+        <Form
+          getWeather={getWeather}
+          weatherData={weatherData}
+          latitude={latitude}
+          setLatitude={setLatitude}
+          longitude={longitude}
+          setLongitude={setLongitude}
+          APIchoice={APIchoice}
+          setAPIchoice={setAPIchoice}
+        />
       </main>
       <footer className="footer">
         <a
