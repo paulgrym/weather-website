@@ -1,10 +1,13 @@
+import { Form } from "./Form"
 import "./App.css"
 
-function App() {
+const App = () => {
+
   return (
     <div className="container">
       <main className="main">
         <h1 className="header">Pogoda na dziś</h1>
+        <Form />
       </main>
       <footer className="footer">
         <a
