@@ -70,7 +70,7 @@ export const Form: React.VFC<FormProps> = ({
               &nbsp;openweathermap.org
             </label>
           </li>
-          <li className="form__listItem">
+          <li className="form__radioButtonsListItem">
             <label className="form__radioButton">
               <input
                 type="radio"
