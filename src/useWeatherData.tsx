@@ -4,7 +4,7 @@ import { BasicWeatherData, WeatherData } from "./interfaces";
 export const useWeatherData = () => {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
-  const [APIchoice, setAPIchoice] = useState("API1")
+  const [APIchoice, setAPIchoice] = useState("API1");
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
 
   const APIkey1 = `${process.env.REACT_APP_WEATHER_API_KEY_1}`;
