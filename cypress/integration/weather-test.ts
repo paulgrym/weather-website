@@ -18,18 +18,9 @@ describe("weather form", () => {
     websiteIsOpened();
 
     // when
-    cy.get("[data-testid=latitudeInput]").type("52");
-    cy.get("[data-testid=longitudeInput]").type("22");
-    cy.get("[data-testid=API1Input]").check();
-    cy.intercept({
-      method: 'GET',
-      url: '*',
-    }).as('getData')
-    cy.get("[data-testid=submit]").click();
-    cy.wait('@getData')
+    completeForm("[data-testid=API1Input]", 52, 22);
 
     // then
-
     cy.get("[data-testid=resultLink]").should("be.visible").should("contain.text", "Openweathermap");
   });
 
@@ -38,28 +29,32 @@ describe("weather form", () => {
     websiteIsOpened();
 
     // when
-    cy.get("[data-testid=latitudeInput]").type("52");
-    cy.get("[data-testid=longitudeInput]").type("22");
-    cy.get("[data-testid=API2Input]").check();
-    cy.intercept({
-      method: 'GET',
-      url: '*',
-    }).as('getData')
-    cy.get("[data-testid=submit]").click();
-    cy.wait('@getData')
+    completeForm("[data-testid=API2Input]", 52, 22);
 
     // then
-
     cy.get("[data-testid=resultLink]").should("be.visible").should("contain.text", "Weatherbit");
   });
 });
 
-function displaysHeader(result: string) {
-  cy.get("[data-testid=header]").should("be.visible").contains(result);
-}
-
 function websiteIsOpened() {
   cy.visit("http://localhost:3000");
+  cy.get("[data-testid=weatherContainer]").should("exist");
+}
+
+function completeForm(radioInput: string, lat: number, long: number) {
+  cy.get("[data-testid=latitudeInput]").type(lat);
+  cy.get("[data-testid=longitudeInput]").type(long);
+  cy.get(radioInput).check();
+  cy.intercept({
+    method: 'GET',
+    url: '*',
+  }).as('getData')
+  cy.get("[data-testid=submit]").click();
+  cy.wait('@getData')
+}
+
+function displaysHeader(headerText: string) {
+  cy.get("[data-testid=header]").should("be.visible").contains(headerText);
 }
 
 function displaysLatitudeInput() {
@@ -78,6 +73,6 @@ function displaysRadioButtons() {
   })
 }
 
-function displaysButton(result: string) {
-  cy.get("[data-testid=submit]").should("be.visible").contains(result);
+function displaysButton(buttonText: string) {
+  cy.get("[data-testid=submit]").should("be.visible").contains(buttonText);
 }
