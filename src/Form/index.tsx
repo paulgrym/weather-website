@@ -59,7 +59,7 @@ export const Form: React.VFC<FormProps> = ({
         <legend className="form__radioButtonsListTitle">Źródło danych:</legend>
         <ul className="form__radioButtonsList" data-testid="radioButtonsList">
           <li className="form__radioButtonsListItem">
-            <label>
+            <label className="form__radioButton">
               <input
                 type="radio"
                 checked={"API1" === APIchoice}
@@ -71,7 +71,7 @@ export const Form: React.VFC<FormProps> = ({
             </label>
           </li>
           <li className="form__listItem">
-            <label>
+            <label className="form__radioButton">
               <input
                 type="radio"
                 checked={"API2" === APIchoice}
