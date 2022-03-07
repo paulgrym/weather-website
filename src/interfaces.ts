@@ -20,7 +20,6 @@ export interface ErrorWeatherData {
 
 export interface FormProps {
   getWeather: () => Promise<void>;
-  weatherData: WeatherData | null;
   latitude: string;
   setLatitude: React.Dispatch<React.SetStateAction<string>>;
   longitude: string;

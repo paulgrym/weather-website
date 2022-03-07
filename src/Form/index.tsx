@@ -3,7 +3,6 @@ import "./style.css";
 
 export const Form: React.VFC<FormProps> = ({
   getWeather,
-  weatherData,
   latitude,
   setLatitude,
   longitude,
@@ -19,8 +18,6 @@ export const Form: React.VFC<FormProps> = ({
 
   const onLatitudeChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => setLatitude(target.value);
   const onLongitudeChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => setLongitude(target.value);
-
-  console.log(weatherData);
 
   return (
     <form className="form" onSubmit={onFormSubmit}>
@@ -87,7 +84,7 @@ export const Form: React.VFC<FormProps> = ({
           </li>
         </ul>
       </fieldset>
-      <button className="form__button" data-testid="submit">Pokaż pogodę!</button>
+      <button className="form__button" disabled={!latitude || !longitude} data-testid="submit">Pokaż pogodę!</button>
     </ form>
   )
 };

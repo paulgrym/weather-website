@@ -21,7 +21,6 @@ const App: React.VFC = () => {
         <h1 className="header" data-testid="header">Pogoda na dziś</h1>
         <Form
           getWeather={getWeather}
-          weatherData={weatherData}
           latitude={latitude}
           setLatitude={setLatitude}
           longitude={longitude}
