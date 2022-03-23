@@ -6,7 +6,11 @@ export interface BasicWeatherData {
   sourceName: string;
 }
 
-export type WeatherData = SuccessWeatherData | ErrorWeatherData;
+export type WeatherData = SuccessWeatherData | ErrorWeatherData | LoadingWeatherData;
+
+export interface LoadingWeatherData {
+  state: "loading";
+}
 
 export interface SuccessWeatherData {
   state: "success";
@@ -19,7 +23,7 @@ export interface ErrorWeatherData {
 }
 
 export interface FormProps {
-  getWeather: () => Promise<void>;
+  getWeather: () => void;
   latitude: string;
   setLatitude: React.Dispatch<React.SetStateAction<string>>;
   longitude: string;

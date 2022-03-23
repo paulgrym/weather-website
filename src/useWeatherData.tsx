@@ -15,8 +15,12 @@ export const useWeatherData = () => {
     `https://api.weatherbit.io/v2.0/current?lat=${latitude}&lon=${longitude}&key=${APIkey2}`
   ];
 
+  const getWeather = () => {
+    setWeatherData({ state: "loading" });
+    setTimeout(getWeatherFromAPI, 1000);
+  };
 
-  const getWeather = async () => {
+  const getWeatherFromAPI = async () => {
     try {
       const response = await fetch(APIchoice === "API1" ? APIUrl[0] : APIUrl[1]);
 
