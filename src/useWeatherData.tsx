@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BasicWeatherData, WeatherData } from "./interfaces";
+import { openweathermapParser, weatherbitParser } from "./parsers";
 
 export const useWeatherData = () => {
   const [latitude, setLatitude] = useState("");
@@ -14,6 +15,25 @@ export const useWeatherData = () => {
     `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${APIkey1}&units=metric`,
     `https://api.weatherbit.io/v2.0/current?lat=${latitude}&lon=${longitude}&key=${APIkey2}`
   ];
+
+  const parseData = (data: any): BasicWeatherData => {
+    const PARSERS = [
+      openweathermapParser,
+      weatherbitParser,
+    ];
+
+    let parsedData!: BasicWeatherData;
+    PARSERS.find((parser) => {
+      try {
+        parsedData = parser(data);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    });
+
+    return parsedData;
+  };
 
   const getWeather = () => {
     setWeatherData({ state: "loading" });
@@ -30,24 +50,7 @@ export const useWeatherData = () => {
 
       const data = await response.json();
 
-      let basicWeatherData: BasicWeatherData;
-      if (APIchoice === "API1") {
-        basicWeatherData = {
-          temperature: data.main.temp,
-          humidity: data.main.humidity,
-          pressure: data.main.pressure,
-          sourceUrl: "https://openweathermap.org/",
-          sourceName: "Openweathermap",
-        }
-      } else {
-        basicWeatherData = {
-          temperature: data.data[0].temp,
-          humidity: data.data[0].rh,
-          pressure: data.data[0].pres,
-          sourceUrl: "https://www.weatherbit.io/",
-          sourceName: "Weatherbit",
-        }
-      }
+      const basicWeatherData = parseData(data);
 
       setWeatherData({
         basicWeatherData,
