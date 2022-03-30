@@ -1,20 +1,20 @@
-import { BasicWeatherData } from "./interfaces";
+import { BasicWeatherData, OpenweatherParser, WeatherbitParser } from "./interfaces";
 
-export const openweathermapParser = (data: any): BasicWeatherData => {
+export const openweathermapParser = (response: OpenweatherParser): BasicWeatherData => {
   return ({
-    temperature: data.main.temp,
-    humidity: data.main.humidity,
-    pressure: data.main.pressure,
+    temperature: response.main.temp,
+    humidity: response.main.humidity,
+    pressure: response.main.pressure,
     sourceUrl: "https://openweathermap.org/",
     sourceName: "Openweathermap",
   })
 };
 
-export const weatherbitParser = (data: any): BasicWeatherData => {
+export const weatherbitParser = (response: WeatherbitParser): BasicWeatherData => {
   return ({
-    temperature: data.data[0].temp,
-    humidity: data.data[0].rh,
-    pressure: data.data[0].pres,
+    temperature: response.data[0].temp,
+    humidity: response.data[0].rh,
+    pressure: response.data[0].pres,
     sourceUrl: "https://www.weatherbit.io/",
     sourceName: "Weatherbit",
   })

@@ -31,3 +31,22 @@ export interface FormProps {
   APIchoice: string;
   setAPIchoice: React.Dispatch<React.SetStateAction<string>>;
 }
+
+
+export type Parser = OpenweatherParser | WeatherbitParser;
+
+export interface OpenweatherParser {
+  main: {
+    temp: number;
+    humidity: number;
+    pressure: number;
+  }
+}
+
+export interface WeatherbitParser {
+  data: [{
+    temp: number;
+    rh: number;
+    pres: number;
+  }]
+}

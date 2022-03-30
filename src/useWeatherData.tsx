@@ -16,7 +16,7 @@ export const useWeatherData = () => {
     `https://api.weatherbit.io/v2.0/current?lat=${latitude}&lon=${longitude}&key=${APIkey2}`
   ];
 
-  const parseData = (data: any): BasicWeatherData => {
+  const parseData = (response: any): BasicWeatherData => {
     const PARSERS = [
       openweathermapParser,
       weatherbitParser,
@@ -25,7 +25,7 @@ export const useWeatherData = () => {
     let parsedData!: BasicWeatherData;
     PARSERS.find((parser) => {
       try {
-        parsedData = parser(data);
+        parsedData = parser(response);
         return true;
       } catch (e) {
         return false;
@@ -49,6 +49,7 @@ export const useWeatherData = () => {
       }
 
       const data = await response.json();
+      console.log(data);
 
       const basicWeatherData = parseData(data);
 
