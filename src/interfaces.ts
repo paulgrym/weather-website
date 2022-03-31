@@ -43,10 +43,18 @@ export interface OpenweatherParser {
   }
 }
 
+export const isOpenWeatherParser = (parser: Parser): parser is OpenweatherParser => {
+  return parser.hasOwnProperty('main');
+}
+
 export interface WeatherbitParser {
   data: [{
     temp: number;
     rh: number;
     pres: number;
   }]
+}
+
+export const isWeatherBitParser = (parser: Parser): parser is WeatherbitParser => {
+  return parser.hasOwnProperty('data');
 }

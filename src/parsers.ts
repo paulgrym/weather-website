@@ -1,6 +1,10 @@
-import { BasicWeatherData, OpenweatherParser, WeatherbitParser } from "./interfaces";
+import { BasicWeatherData, isOpenWeatherParser, isWeatherBitParser, Parser } from "./interfaces";
 
-export const openweathermapParser = (response: OpenweatherParser): BasicWeatherData => {
+export const openweathermapParser = (response: Parser): BasicWeatherData => {
+  if (!isOpenWeatherParser(response)) {
+    throw new Error()
+  };
+
   return ({
     temperature: response.main.temp,
     humidity: response.main.humidity,
@@ -10,7 +14,11 @@ export const openweathermapParser = (response: OpenweatherParser): BasicWeatherD
   })
 };
 
-export const weatherbitParser = (response: WeatherbitParser): BasicWeatherData => {
+export const weatherbitParser = (response: Parser): BasicWeatherData => {
+  if (!isWeatherBitParser(response)) {
+    throw new Error()
+  };
+
   return ({
     temperature: response.data[0].temp,
     humidity: response.data[0].rh,

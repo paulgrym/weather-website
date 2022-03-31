@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BasicWeatherData, WeatherData } from "./interfaces";
+import { BasicWeatherData, Parser, WeatherData } from "./interfaces";
 import { openweathermapParser, weatherbitParser } from "./parsers";
 
 export const useWeatherData = () => {
@@ -16,7 +16,7 @@ export const useWeatherData = () => {
     `https://api.weatherbit.io/v2.0/current?lat=${latitude}&lon=${longitude}&key=${APIkey2}`
   ];
 
-  const parseData = (response: any): BasicWeatherData => {
+  const parseData = (response: Parser): BasicWeatherData => {
     const PARSERS = [
       openweathermapParser,
       weatherbitParser,
@@ -49,7 +49,6 @@ export const useWeatherData = () => {
       }
 
       const data = await response.json();
-      console.log(data);
 
       const basicWeatherData = parseData(data);
 
