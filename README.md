@@ -1,4 +1,7 @@
 # Weather Api
+An application that retrieves basic weather data from two different APIs. It shows my first steps in using Typescript and testing with Cypress.
+
+Made as a part of the ElPassion workshop.
 
 [Demo](https://paulgrym.github.io/weather-website/)
 
@@ -19,7 +22,6 @@ Wskazówki
 - Zapoznaj się z wzorcem projektowym ["Adapter"](https://refactoring.guru/pl/design-patterns/adapter) [(przykład)](https://refactoring.guru/pl/design-patterns/adapter/typescript/example). Może Ci on pomóc w lepszym poukładaniu kodu w aplikacji.
 - Pamiętaj o testach :). Testy znajdują się w folderze cypress/integration. Wraz z przykładowym testem `example.ts`.
 - Żeby testy przechodziły pamiętaj, że musi być włączony serwer ponieważ są to testy e2e.
-- Zapoznaj się z tym jak kodować w Nest'cie poniżej.
 
 # Getting Started with Create React App
 
